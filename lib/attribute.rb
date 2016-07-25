@@ -45,11 +45,8 @@ class AttrPattern < Attribute
                   ]
 
   def initialize(value)
-    if PATTERN_LIST.include? value
-        super(:pattern, value)
-    else
-        raise(ArgumentError, "check pattern list => #{PATTERN_LIST}") 
-    end
+    raise(ArgumentError, "check pattern list => #{PATTERN_LIST}") unless PATTERN_LIST.include? value
+    super(:pattern, value)
   end
 
   def render
