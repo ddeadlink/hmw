@@ -1,0 +1,16 @@
+#encoding: utf-8
+require 'rubygems'
+require 'open-uri'
+require 'nokogiri'
+require 'json'
+require 'active_support/all'
+
+link = 'http://ru.aliexpress.com/store/group/Phones/1986585_506350288.html?aff_platform=aaf&sk=eub6yrrBy%3A&cpt=1471512743432&af=10546_19&cv=89827&cn=2oc3mhzvpx218ax5wfqsxlopff9uebyo&dp=v5_2oc3mhzvpx218ax5wfqsxlopff9uebyo&afref=http%3A%2F%2Fvk.com%2Faway.ph&aff_trace_key=12ce769729904d2e8018a43a518cc687-1471512743432-03970-eub6yrrBy'
+doc = Nokogiri::HTML(open(link))
+info = []
+doc.css('.detail h3 a').map do |item|
+  info.push(
+    href: item['href'],
+    title: item.inner_html
+  )
+end
